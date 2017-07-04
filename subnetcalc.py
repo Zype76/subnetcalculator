@@ -57,11 +57,9 @@ def subnetcalc():
       "9":"255.128.0.0",
       "8":"255.0.0.0"}
      snet_mask = subnet_label.get()
-     #snetresult = 32 - int(snet_mask)
-     #snetlist = snet_dictionary[snet_mask]
-     #snet_addr = 2 ^ snetresult 
-     #snet_hosts = snet_addr - 2 
+     subnet_host["text"] = (2 ** (32 - int(snet_mask)) -2)
      sbnetout["text"] = snet_dictionary[snet_mask]
+
 
 #Run both functions when you click the button :^)
 def runbothfunctions():
@@ -78,7 +76,8 @@ tk.Label(root, text="Enter ip:").grid(row=0, column=0)
 tk.Label(root, text="Subnet mask CIDR notation:").grid(row=1, column=0)
 tk.Label(root, text = 'Public or private? ').grid(row=2, column=0)
 tk.Label(root, text = 'Subnet mask: ').grid(row=3, column=0)
-tk.Button(root, text="Quit", command=quit).grid(row=4,column=0)
+tk.Label(root, text = 'Usable hosts: ').grid(row=4, column=0)
+
 
 #Dem inputs 
 ipaddres_label = tk.Entry(root)
@@ -86,6 +85,10 @@ ipaddres_label.grid(row=0, column=1)
 
 subnet_label = tk.Entry(root)
 subnet_label.grid(row=1, column=1)
+
+#Dem calculations
+subnet_host = tk.Label(root, text = '')
+subnet_host.grid(row=4, column=1)
 
 #Dem outputs
 ipCout = tk.Label(root, text = '')
@@ -96,10 +99,10 @@ sbnetout.grid(row=3, column=1)
 
 #To calcuate the result 
 dank_button = tk.Button(root, text="Calculate", command=runbothfunctions)
-dank_button.grid(row=4,column=1)
+dank_button.grid(row=5,column=1)
 
 #To exit: 
-tk.Button(root, text="Quit", command=quit).grid(row=4,column=0)
+tk.Button(root, text="Quit", command=quit).grid(row=5,column=0)
 
 #A function I created to exit the widget. 
 def quit():
