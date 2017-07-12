@@ -3,7 +3,7 @@
 Created on Sun Jul  2 10:32:17 2017
 
 @author: Paul Hansen
-Version 1.0
+Version 2.0
 """
 import tkinter as tk
 
@@ -12,19 +12,23 @@ def privateip():
     ipA = ipaddres_label.get()
     ipaddrs = ipA.split('.')
     terrible = list(range(16,31))
+    if len(ipaddrs) != 4: 
+        ipCout["text"] = "You need to enter an ip address..."
+    
     lame = int(ipaddrs[1])
     
     if ipaddrs[0] == "192" and ipaddrs[1] == "168":
         ipCout["text"] = "This is a private ip"
-
-
+        
     elif ipaddrs[0] == "10":
         ipCout["text"] = "This is a private ip"
-
-
+        
     elif ipaddrs[0] == "172" and  lame in terrible: 
         ipCout["text"] = "This is a private ip"
 
+    elif ipaddrs[0] == "169" and  ipaddrs[1] == "254":
+        ipCout["text"] = "This is a link local address!"
+        
     else:
         ipCout["text"] = "This is a public ip address"
 
@@ -55,7 +59,14 @@ def subnetcalc():
       "11":"255.224.0.0",
       "10":"255.192.0.0",
       "9":"255.128.0.0",
-      "8":"255.0.0.0"}
+      "8":"255.0.0.0",
+      "7":"254.0.0.0",
+      "6":"252.0.0.0",
+      "5":"248.0.0.0",
+      "4":"240.0.0.0",
+      "3":"224.0.0.0",
+      "2":"192.0.0.0",
+      "1":"128.0.0.0",}
      snet_mask = subnet_label.get()
      subnet_host["text"] = (2 ** (32 - int(snet_mask)) -2)
      sbnetout["text"] = snet_dictionary[snet_mask]
